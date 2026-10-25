@@ -1,0 +1,23 @@
+# Invoices not yet paid, earliest due date first. Expects notes in Business/Invoices with frontmatter: status, due, amount.
+filters:
+  and:
+    - file.inFolder("Business/Invoices")
+    - 'note.status != "paid"'
+properties:
+  note.due:
+    displayName: Due
+  note.amount:
+    displayName: Amount
+views:
+  - type: table
+    name: "Invoices due"
+    groupBy:
+      property: note.due
+      direction: ASC
+    order:
+      - file.name
+      - note.due
+      - note.amount
+      - note.status
+    summaries:
+      note.amount: Sum

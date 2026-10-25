@@ -1,0 +1,21 @@
+# Pipeline: deals grouped by stage. Expects notes in Business/Deals with frontmatter: status, amount, next_step.
+filters:
+  and:
+    - file.inFolder("Business/Deals")
+properties:
+  note.amount:
+    displayName: Amount
+  note.next_step:
+    displayName: Next step
+views:
+  - type: table
+    name: "Pipeline by stage"
+    groupBy:
+      property: note.status
+      direction: ASC
+    order:
+      - file.name
+      - note.amount
+      - note.next_step
+    summaries:
+      note.amount: Sum

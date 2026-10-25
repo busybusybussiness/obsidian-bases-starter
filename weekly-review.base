@@ -1,0 +1,14 @@
+# Notes touched in the last 7 days, grouped by folder. Use it as the weekly review list.
+filters:
+  and:
+    - 'file.mtime > now() - "7d"'
+    - 'file.ext == "md"'
+views:
+  - type: list
+    name: "Touched this week"
+    groupBy:
+      property: file.folder
+      direction: ASC
+    order:
+      - file.name
+      - file.mtime
